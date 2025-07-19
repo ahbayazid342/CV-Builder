@@ -41,12 +41,28 @@ export interface Achievement {
   title: string;
 }
 
+export interface CustomSectionItem {
+  id: string;
+  title: string;
+  subtitle?: string;
+  description?: string;
+  date?: string;
+}
+
+export interface CustomSection {
+  id: string;
+  name: string;
+  icon: string; // Icon name from lucide-react
+  items: CustomSectionItem[];
+}
+
 export interface CVData {
   personalInfo: PersonalInfo;
   experience: Experience[];
   education: Education[];
   skills: Skill[];
   achievements: Achievement[];
+  customSections: CustomSection[];
 }
 
 export interface CVTheme {
@@ -111,6 +127,22 @@ export const defaultCVData: CVData = {
   achievements: [
     { id: '1', title: 'Got Dean Scholarship 4 times in BSc for outstanding results' },
     { id: '2', title: 'Got Scholarship at Primary School Certificates (PSC) & Junior School Certificates (JSC)' }
+  ],
+  customSections: [
+    {
+      id: '1',
+      name: 'Projects',
+      icon: 'FolderOpen',
+      items: [
+        {
+          id: '1',
+          title: 'E-commerce Website',
+          subtitle: 'React & Node.js',
+          description: 'Built a full-stack e-commerce platform with payment integration',
+          date: '2024'
+        }
+      ]
+    }
   ]
 };
 

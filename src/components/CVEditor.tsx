@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { User, Briefcase, GraduationCap, Star, Palette, Trophy } from 'lucide-react';
+import { User, Briefcase, GraduationCap, Star, Palette, Trophy, Plus } from 'lucide-react';
 import type { CVData, CVTheme } from '../types/cv';
 import { ExperienceEditor } from './editors/ExperienceEditor';
 import { SkillsEditor } from './editors/SkillsEditor';
@@ -7,6 +7,7 @@ import { EducationEditor } from './editors/EducationEditor';
 import { PersonalInfoEditor } from './editors/PersonalInfoEditor';
 import { ThemeEditor } from './editors/ThemeEditor';
 import { AchievementsEditor } from './editors/AchievementsEditor';
+import { CustomSectionEditor } from './editors/CustomSectionEditor';
 
 interface CVEditorProps {
   cvData: CVData;
@@ -15,7 +16,7 @@ interface CVEditorProps {
   onThemeChange: (newTheme: CVTheme) => void;
 }
 
-type EditorTab = 'personal' | 'experience' | 'education' | 'skills' | 'achievements' | 'theme';
+type EditorTab = 'personal' | 'experience' | 'education' | 'skills' | 'achievements' | 'custom' | 'theme';
 
 export function CVEditor({ cvData, theme, onDataChange, onThemeChange }: CVEditorProps) {
   const [activeTab, setActiveTab] = useState<EditorTab>('personal');
@@ -39,6 +40,7 @@ export function CVEditor({ cvData, theme, onDataChange, onThemeChange }: CVEdito
     { id: 'education' as const, label: 'Education', icon: GraduationCap },
     { id: 'skills' as const, label: 'Skills', icon: Star },
     { id: 'achievements' as const, label: 'Achievements', icon: Trophy },
+    { id: 'custom' as const, label: 'Custom Sections', icon: Plus },
     { id: 'theme' as const, label: 'Theme', icon: Palette },
   ];
 
@@ -77,6 +79,13 @@ export function CVEditor({ cvData, theme, onDataChange, onThemeChange }: CVEdito
           <AchievementsEditor
             achievements={cvData.achievements}
             onChange={(achievements) => onDataChange({ ...cvData, achievements })}
+          />
+        );
+      case 'custom':
+        return (
+          <CustomSectionEditor
+            customSections={cvData.customSections}
+            onChange={(customSections) => onDataChange({ ...cvData, customSections })}
           />
         );
       case 'theme':

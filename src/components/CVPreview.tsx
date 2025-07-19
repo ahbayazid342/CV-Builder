@@ -1,3 +1,4 @@
+import { FolderOpen, Award, Users, Book, Globe, Briefcase, Settings, Heart } from 'lucide-react';
 import type { CVData, CVTheme } from '../types/cv';
 import './CVPreview.css';
 
@@ -7,7 +8,21 @@ interface CVPreviewProps {
 }
 
 export function CVPreview({ cvData, theme }: CVPreviewProps) {
-  const { personalInfo, experience, education, skills, achievements } = cvData;
+  const { personalInfo, experience, education, skills, achievements, customSections } = cvData;
+
+  const getIconComponent = (iconName: string) => {
+    const iconMap: { [key: string]: any } = {
+      FolderOpen,
+      Award,
+      Users,
+      Book,
+      Globe,
+      Briefcase,
+      Settings,
+      Heart,
+    };
+    return iconMap[iconName] || FolderOpen;
+  };
 
   const formatDate = (dateString: string) => {
     if (!dateString) return 'Present';
@@ -168,6 +183,42 @@ export function CVPreview({ cvData, theme }: CVPreviewProps) {
             </div>
           </section>
         )}
+
+        {/* Custom Sections */}
+        {customSections.map((section) => {
+          if (section.items.length === 0) return null;
+          
+          const IconComponent = getIconComponent(section.icon);
+          
+          return (
+            <section key={section.id} className="cv-section">
+              <h2 className="section-title">
+                <IconComponent size={18} className="section-icon" />
+                {section.name.toUpperCase()}
+              </h2>
+              <div className="custom-section-list">
+                {section.items.map((item) => (
+                  <div key={item.id} className="custom-section-item">
+                    <div className="custom-item-header">
+                      <div className="custom-item-title-group">
+                        <h3 className="custom-item-title">{item.title}</h3>
+                        {item.subtitle && (
+                          <h4 className="custom-item-subtitle">{item.subtitle}</h4>
+                        )}
+                      </div>
+                      {item.date && (
+                        <div className="custom-item-date">{item.date}</div>
+                      )}
+                    </div>
+                    {item.description && (
+                      <p className="custom-item-description">{item.description}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          );
+        })}
       </div>
     </div>
   );

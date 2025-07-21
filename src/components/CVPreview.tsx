@@ -1,5 +1,6 @@
 import { FolderOpen, Award, Users, Book, Globe, Briefcase, Settings, Heart } from 'lucide-react';
 import type { CVData, CVTheme } from '../types/cv';
+import { ClassicTemplate } from '../templates/ClassicTemplate';
 import './CVPreview.css';
 
 interface CVPreviewProps {
@@ -8,6 +9,23 @@ interface CVPreviewProps {
 }
 
 export function CVPreview({ cvData, theme }: CVPreviewProps) {
+  // If template is not 'modern', render the appropriate template component
+  if (theme.template === 'classic') {
+    return <ClassicTemplate cvData={cvData} theme={theme} />;
+  }
+  
+  // For other templates, we'll add them later
+  if (theme.template === 'minimal') {
+    // TODO: Implement MinimalTemplate
+    return <div className="template-placeholder">Minimal template coming soon...</div>;
+  }
+  
+  if (theme.template === 'creative') {
+    // TODO: Implement CreativeTemplate
+    return <div className="template-placeholder">Creative template coming soon...</div>;
+  }
+  
+  // Default to modern template (current sidebar layout)
   const { personalInfo, experience, education, skills, achievements, customSections } = cvData;
 
   const getIconComponent = (iconName: string) => {

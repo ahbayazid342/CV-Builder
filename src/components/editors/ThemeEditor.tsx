@@ -1,4 +1,5 @@
-import type { CVTheme } from '../../types/cv';
+import type { CVTheme, CVTemplate } from '../../types/cv';
+import { availableTemplates } from '../../templates';
 
 interface ThemeEditorProps {
   theme: CVTheme;
@@ -71,6 +72,37 @@ export function ThemeEditor({ theme, onChange }: ThemeEditorProps) {
     <div className="editor-section">
       <h3 className="section-title">Theme & Styling</h3>
       
+      <div className="theme-section">
+        <h4 className="subsection-title">CV Templates</h4>
+        <div className="template-selection">
+          {availableTemplates.map((template) => (
+            <div
+              key={template.id}
+              className={`template-option ${theme.template === template.id ? 'active' : ''}`}
+              onClick={() => handleChange('template', template.id)}
+            >
+              <div className="template-preview">
+                <div className="template-icon">
+                  {template.id === 'modern' && '📄'}
+                  {template.id === 'classic' && '📋'}
+                  {template.id === 'minimal' && '📃'}
+                  {template.id === 'creative' && '🎨'}
+                </div>
+              </div>
+              <div className="template-info">
+                <h5 className="template-name">{template.name}</h5>
+                <p className="template-description">{template.description}</p>
+                <ul className="template-features">
+                  {template.features.slice(0, 2).map((feature, index) => (
+                    <li key={index}>• {feature}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="theme-section">
         <h4 className="subsection-title">Quick Themes</h4>
         <div className="preset-themes">

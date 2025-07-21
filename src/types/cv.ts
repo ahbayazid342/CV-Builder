@@ -65,6 +65,8 @@ export interface CVData {
   customSections: CustomSection[];
 }
 
+export type CVTemplate = 'modern' | 'classic' | 'minimal' | 'creative';
+
 export interface CVTheme {
   name: string;
   primaryColor: string;
@@ -72,6 +74,7 @@ export interface CVTheme {
   accentColor: string;
   fontFamily: string;
   fontSize: number;
+  template: CVTemplate;
 }
 
 export const defaultCVData: CVData = {
@@ -152,5 +155,6 @@ export const defaultTheme: CVTheme = {
   secondaryColor: '#64748b',
   accentColor: '#0f172a',
   fontFamily: 'Inter, system-ui, sans-serif',
-  fontSize: 14
+  fontSize: 14,
+  template: 'modern'
 };

@@ -1,6 +1,7 @@
 import { FolderOpen, Award, Users, Book, Globe, Briefcase, Settings, Heart } from 'lucide-react';
 import type { CVData, CVTheme } from '../types/cv';
 import { ClassicTemplate } from '../templates/ClassicTemplate';
+import { BiodataTemplate } from '../templates/BiodataTemplate';
 import './CVPreview.css';
 
 interface CVPreviewProps {
@@ -12,6 +13,10 @@ export function CVPreview({ cvData, theme }: CVPreviewProps) {
   // If template is not 'modern', render the appropriate template component
   if (theme.template === 'classic') {
     return <ClassicTemplate cvData={cvData} theme={theme} />;
+  }
+  
+  if (theme.template === 'biodata') {
+    return <BiodataTemplate cvData={cvData} theme={theme} />;
   }
   
   // For other templates, we'll add them later

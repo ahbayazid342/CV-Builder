@@ -7,6 +7,43 @@ export interface PersonalInfo {
   linkedin?: string;
   summary: string;
   profileImage?: string; // Base64 encoded image or data URL
+  // Biodata specific fields
+  birthDate?: string;
+  birthTime?: string;
+  birthPlace?: string;
+  religion?: string;
+  caste?: string;
+  subCaste?: string;
+  gotra?: string;
+  height?: string;
+  weight?: string;
+  bloodGroup?: string;
+  complexion?: string;
+  physicalDisability?: string;
+  maritalStatus?: string;
+  occupation?: string;
+  jobTitle?: string;
+  workPlace?: string;
+  workLocation?: string;
+  annualIncome?: string;
+  manglik?: string;
+  horoscope?: string;
+  diet?: string;
+  drinking?: string;
+  smoking?: string;
+  fatherName?: string;
+  fatherOccupation?: string;
+  motherName?: string;
+  motherOccupation?: string;
+  siblings?: string;
+  brothers?: string;
+  sisters?: string;
+  familyType?: string;
+  familyStatus?: string;
+  familyValues?: string;
+  contactNo?: string;
+  address?: string;
+  nativePlace?: string;
 }
 
 export interface Experience {
@@ -65,7 +102,7 @@ export interface CVData {
   customSections: CustomSection[];
 }
 
-export type CVTemplate = 'modern' | 'classic' | 'minimal' | 'creative';
+export type CVTemplate = 'modern' | 'classic' | 'minimal' | 'creative' | 'biodata';
 
 export interface CVTheme {
   name: string;

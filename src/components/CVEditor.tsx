@@ -5,6 +5,7 @@ import { ExperienceEditor } from './editors/ExperienceEditor';
 import { SkillsEditor } from './editors/SkillsEditor';
 import { EducationEditor } from './editors/EducationEditor';
 import { PersonalInfoEditor } from './editors/PersonalInfoEditor';
+import { BiodataPersonalInfoEditor } from './editors/BiodataPersonalInfoEditor';
 import { ThemeEditor } from './editors/ThemeEditor';
 import { AchievementsEditor } from './editors/AchievementsEditor';
 import { CustomSectionEditor } from './editors/CustomSectionEditor';
@@ -36,17 +37,30 @@ export function CVEditor({ cvData, theme, onDataChange, onThemeChange }: CVEdito
 
   const tabs = [
     { id: 'personal' as const, label: 'Personal Info', icon: User },
-    { id: 'experience' as const, label: 'Experience', icon: Briefcase },
+    ...(theme.template !== 'biodata' ? [
+      { id: 'experience' as const, label: 'Experience', icon: Briefcase },
+    ] : []),
     { id: 'education' as const, label: 'Education', icon: GraduationCap },
-    { id: 'skills' as const, label: 'Skills', icon: Star },
-    { id: 'achievements' as const, label: 'Achievements', icon: Trophy },
-    { id: 'custom' as const, label: 'Custom Sections', icon: Plus },
+    ...(theme.template !== 'biodata' ? [
+      { id: 'skills' as const, label: 'Skills', icon: Star },
+      { id: 'achievements' as const, label: 'Achievements', icon: Trophy },
+      { id: 'custom' as const, label: 'Custom Sections', icon: Plus },
+    ] : []),
     { id: 'theme' as const, label: 'Theme', icon: Palette },
   ];
 
   const renderActiveEditor = () => {
     switch (activeTab) {
       case 'personal':
+        // Use BiodataPersonalInfoEditor for biodata template
+        if (theme.template === 'biodata') {
+          return (
+            <BiodataPersonalInfoEditor
+              personalInfo={cvData.personalInfo}
+              onChange={(personalInfo) => onDataChange({ ...cvData, personalInfo })}
+            />
+          );
+        }
         return (
           <PersonalInfoEditor
             personalInfo={cvData.personalInfo}

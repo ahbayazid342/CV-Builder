@@ -36,6 +36,13 @@ export const availableTemplates: TemplateConfig[] = [
     description: 'Bold design with creative elements for creative professionals',
     preview: '/templates/creative-preview.png',
     features: ['Creative layout', 'Bold typography', 'Color accents', 'Visual elements']
+  },
+  {
+    id: 'biodata',
+    name: 'Biodata Format',
+    description: 'Traditional biodata format for matrimonial and formal purposes',
+    preview: '/templates/biodata-preview.png',
+    features: ['Formal layout', 'Personal details focus', 'Family information', 'Traditional format']
   }
 ];
 
